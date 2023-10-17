@@ -1,16 +1,16 @@
-# This is a sample Python script.
+import requests
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+import data
+import configuration
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def post_new_order():
+    return requests.post(configuration.URL + configuration.PATH,
+                        json=data.body).json()["track"]
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+
+def check_order():
+    return requests.get(configuration.URL + configuration.PATH_GET + str(post_new_order()))
+
+
